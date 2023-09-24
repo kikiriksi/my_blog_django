@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from .models import Post
 from .forms import AddBlogForm
@@ -25,6 +25,14 @@ class OnePost(View):
 
 class AddPost(View):
     '''Добавить блог'''
+
     def get(self, request):
         context = {"form": AddBlogForm}
         return render(request, 'blog/addpost.html', context)
+
+    def post(self, request):
+        form = AddBlogForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        return render(request, 'blog/addpost.html', context={'form': form})
