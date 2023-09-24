@@ -12,3 +12,11 @@ class AllPost(View):
         return render(request, 'blog/home.html', context={
             'all_post': model
         })
+
+
+class OnePost(View):
+    '''Выводит отдельный пост по id'''
+
+    def get(self, request, pk: int):
+        context = {"post": Post.objects.get(id=pk)}
+        return render(request, 'blog/oneblog.html', context)

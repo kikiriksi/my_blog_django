@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Инвормация о {{ post.title }}</title>
+</head>
+<body>
+     <img src="{{ post.image.url }}" width="200px" height="150px">
+            <p>Описание поста:{{ post.descriptions }}</p>
+            <p>Автор: {{ post.author }} </p>
+            <p>Дата публикации поста: {{ post.date }}</p>
+</body>
+</html>
