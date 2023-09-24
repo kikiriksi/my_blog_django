@@ -2,9 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Главная</title>
 </head>
 <body>
+<h3>Записи</h3>
+        {% for post in all_post %}
+            <img src="{{ post.image.url }}" width="200px" height="150px">
+            <p>{{ post.descriptions }}</p>
+            <p>Автор: {{ post.author }} </p>
 
+        {% endfor %}
 </body>
 </html>
