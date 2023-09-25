@@ -10,7 +10,7 @@ class Post(models.Model):
     author = models.CharField(verbose_name='Автор', max_length=25)
     date = models.DateField(verbose_name='Дата публикации')
     image = models.FileField(verbose_name='Изображение', upload_to='image_blog')
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,null=True)
 
     def __str__(self):
         return f'{self.title}, {self.author}, {self.user.username}'
