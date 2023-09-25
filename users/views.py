@@ -1,7 +1,8 @@
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.views import View
-from .forms import UserCreationForm
-
+from .forms import UserCreationForm, LogForm
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 class RegUsers(View):
@@ -18,5 +19,22 @@ class RegUsers(View):
             return render(request, 'users/reg.html', context={'form': form})
 
 
-class LogUsers(View):
+class LogUsers(LoginView):
+    def get(self, request):
+        form = LogForm
+        return render(request, 'users/log.html', context={'form': form})
+
+    def post(self, request):
+        data = request.POST
+        user = authenticate(request, username=data['username'], password=data['password'])
+        if user is None:
+            form = LogForm(request.POST)
+            return render(request, 'users/log.html', context={'form': form})
+        login(request, user)
+        return redirect('home')
+
+
+
+
+class LogautUser(View):
     pass

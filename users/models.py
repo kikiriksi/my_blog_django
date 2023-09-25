@@ -10,3 +10,6 @@ class CustomUser(AbstractUser):
     )
     gender = models.CharField(verbose_name='Пол', max_length=1, choices=GENDERS, default='')
     birth_date = models.DateField(verbose_name='Дата рождения', default='2000-01-01')
+
+    def __str__(self):
+        return self.username
