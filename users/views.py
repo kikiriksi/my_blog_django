@@ -2,7 +2,8 @@ from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.views import View
 from .forms import UserCreationForm, LogForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+
 
 # Create your views here.
 class RegUsers(View):
@@ -34,7 +35,6 @@ class LogUsers(LoginView):
         return redirect('home')
 
 
-
-
-class LogautUser(View):
-    pass
+def logaut(request):
+    logout(request)
+    return redirect('home')
