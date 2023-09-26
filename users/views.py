@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 class RegUsers(View):
+    '''Регистрация пользователя'''
     def get(self, request):
         context = {'form': UserCreationForm()}
         return render(request, 'users/reg.html', context)
@@ -21,6 +22,7 @@ class RegUsers(View):
 
 
 class LogUsers(LoginView):
+    '''Вход в систему'''
     def get(self, request):
         form = LogForm
         return render(request, 'users/log.html', context={'form': form})
@@ -36,5 +38,6 @@ class LogUsers(LoginView):
 
 
 def logaut(request):
+    '''Выход с профиля'''
     logout(request)
     return redirect('home')

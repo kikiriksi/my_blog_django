@@ -10,11 +10,23 @@ class Post(models.Model):
     author = models.CharField(verbose_name='Автор', max_length=25)
     date = models.DateField(verbose_name='Дата публикации')
     image = models.FileField(verbose_name='Изображение', upload_to='image_blog')
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,null=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return f'{self.title}, {self.author}, {self.user.username}'
+        return f'{self.title}, {self.author}, {self.user}'
 
     class Meta:
         verbose_name = 'Запись'  # отвечает за отображения имя таблицы
         verbose_name_plural = 'Записи'
+
+
+class CommentsModel(models.Model):
+    '''Коментарий'''
+    comments = models.TextField(verbose_name='Коментарий', max_length=2000)
+    post = models.ForeignKey(Post, verbose_name="Публикации", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.comments}'
+    class Meta:
+        verbose_name = 'Коментарий'  # отвечает за отображения имя таблицы
+        verbose_name_plural = 'Коментарии'
