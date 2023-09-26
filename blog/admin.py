@@ -5,7 +5,7 @@ from .models import Post, CommentsModel
 # Register your models here.
 @admin.register(Post)
 class AdminPost(admin.ModelAdmin):
-    list_display = ('title', 'author',)  # отоброжение полей
+    list_display = ('title', 'user',)  # отоброжение полей
 
 
 @admin.register(CommentsModel)

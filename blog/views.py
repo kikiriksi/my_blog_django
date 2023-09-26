@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from .models import Post, CommentsModel
 from .forms import AddBlogForm, CommentsForm
+from users.models import CustomUser
 
 
 # Create your views here.
@@ -35,6 +36,8 @@ class AddPost(View):
     def post(self, request):
         form = AddBlogForm(request.POST, request.FILES)
         if form.is_valid():
+            form = form.save(commit=False)
+            form.user = CustomUser.objects.get(username=request.user)
             form.save()
             return redirect('home')
         return render(request, 'blog/addpost.html', context={'form': form})

@@ -7,7 +7,6 @@ class Post(models.Model):
     '''Таблица постов'''
     title = models.CharField(verbose_name='Заголовок', max_length=50)
     descriptions = models.TextField(verbose_name='Текст записи')
-    author = models.CharField(verbose_name='Автор', max_length=25)
     date = models.DateField(verbose_name='Дата публикации')
     image = models.FileField(verbose_name='Изображение', upload_to='image_blog')
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
