@@ -12,7 +12,7 @@ class Post(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return f'{self.title}, {self.author}, {self.user}'
+        return f'{self.title}, {self.user}'
 
     class Meta:
         verbose_name = 'Запись'  # отвечает за отображения имя таблицы

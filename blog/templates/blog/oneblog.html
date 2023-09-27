@@ -14,10 +14,12 @@
          <br><p>Коментарий:{{ coment }}</p>
             <p>Автор коментария:{{ coment.post.user }}</p>
      {% endfor %}
+     {% if user.is_authenticated %}
      <form action="{% url 'addbcomment' post.id %}" method="post">
          {% csrf_token %}
          {{ formcomit }}
          <button type="submit">Оставить коментарий</button>
      </form>
+    {% endif %}
 </body>
 </html>
