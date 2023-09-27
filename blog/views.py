@@ -53,3 +53,9 @@ class Comments(View):
             form.post_id = pk
             form.save()
         return redirect(f'/{pk}')
+
+
+def delpost(request, pk: int):
+    post = CommentsModel.objects.get(id=pk)
+    post.delete()
+    return redirect('home')

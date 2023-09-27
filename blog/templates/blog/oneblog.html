@@ -11,11 +11,17 @@
             <p>Дата публикации поста: {{ post.date }}</p>
             <h3><a href="{% url 'home' %}">На главную</a></h3>
      {% for coment in coments %}
-         <br><p>Коментарий:{{ coment }}</p>
+         <form action="{% url 'delpost' coment.id %}" method="post">
+         {% csrf_token %}
+            <br><p>Коментарий:{{ coment }}</p>
             <p>Автор коментария:{{ coment.post.user }}</p>
+            {% if user == coment.post.user %}
+                <button type="submit">Удалить коментарий</button>
+         </form>
+            {% endif %}
      {% endfor %}
      {% if user.is_authenticated %}
-     <form action="{% url 'addbcomment' post.id %}" method="post">
+         <form action="{% url 'addbcomment' post.id %}" method="post">
          {% csrf_token %}
          {{ formcomit }}
          <button type="submit">Оставить коментарий</button>
