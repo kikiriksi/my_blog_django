@@ -1,6 +1,8 @@
 from django.db import models
 from users.models import CustomUser
 import datetime
+
+
 # Create your models here.
 class Post(models.Model):
     '''Таблица постов'''
@@ -22,8 +24,10 @@ class CommentsModel(models.Model):
     '''Коментарий'''
     comments = models.TextField(verbose_name='Коментарий', max_length=2000)
     post = models.ForeignKey(Post, verbose_name="Публикации", on_delete=models.CASCADE)
+
     def __str__(self):
         return f'{self.comments}'
+
     class Meta:
         verbose_name = 'Коментарий'  # отвечает за отображения имя таблицы
         verbose_name_plural = 'Коментарии'

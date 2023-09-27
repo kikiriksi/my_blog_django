@@ -21,7 +21,7 @@ class OnePost(View):
 
     def get(self, request, pk: int):
         context = {"post": Post.objects.get(id=pk),
-                   "coments": CommentsModel.objects.all(),
+                   "coments": CommentsModel.objects.filter(post=Post.objects.get(id=pk)),
                    "formcomit": CommentsForm}
         return render(request, 'blog/oneblog.html', context)
 
@@ -49,6 +49,7 @@ class Comments(View):
     def post(self, request, pk: int):
         form = CommentsForm(request.POST)
         if form.is_valid():
+            form.post = Post.objects.get(id=pk).title
             form = form.save(commit=False)
             form.post_id = pk
             form.save()
