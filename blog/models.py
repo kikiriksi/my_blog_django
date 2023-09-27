@@ -1,13 +1,12 @@
 from django.db import models
 from users.models import CustomUser
-
-
+import datetime
 # Create your models here.
 class Post(models.Model):
     '''Таблица постов'''
     title = models.CharField(verbose_name='Заголовок', max_length=50)
     descriptions = models.TextField(verbose_name='Текст записи')
-    date = models.DateField(verbose_name='Дата публикации')
+    date = models.DateTimeField(auto_now_add=True)
     image = models.FileField(verbose_name='Изображение', upload_to='image_blog')
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
 
