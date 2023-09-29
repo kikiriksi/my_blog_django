@@ -9,9 +9,15 @@
             <p>Описание поста:{{ post.descriptions }}</p>
             <p>Автор: {{ post.user }} </p>
             <p>Дата публикации поста: {{ post.date }}</p>
+            {% if post.user == user %}
+                <a href="{% url 'change' post.id %}">
+                    <h2>Изменить пост</h2>
+                </a>
+            {% endif %}
+    </form>
             <h3><a href="{% url 'home' %}">На главную</a></h3>
      {% for coment in coments %}
-         <form action="{% url 'delpost' coment.id %}" method="post">
+         <form action="{% url 'delcoment' coment.id %}" method="post">
          {% csrf_token %}
             <br><p>Коментарий:{{ coment }}</p>
             <p>Автор коментария:{{ coment.post.user }}</p>
@@ -23,7 +29,7 @@
      {% if user.is_authenticated %}
          <form action="{% url 'addbcomment' post.id %}" method="post">
          {% csrf_token %}
-         {{ formcomit }}
+            {{ formcomit }}
          <button type="submit">Оставить коментарий</button>
      </form>
     {% endif %}

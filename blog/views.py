@@ -21,7 +21,7 @@ class OnePost(View):
 
     def get(self, request, pk: int):
         context = {"post": Post.objects.get(id=pk),
-                   "coments": CommentsModel.objects.all(),
+                   "coments": CommentsModel.objects.filter(post=Post.objects.get(id=pk)),
                    "formcomit": CommentsForm}
         return render(request, 'blog/oneblog.html', context)
 
@@ -50,12 +50,27 @@ class Comments(View):
         form = CommentsForm(request.POST)
         if form.is_valid():
             form = form.save(commit=False)
-            form.post_id = pk
+            form.post = Post.objects.get(id=pk)
             form.save()
         return redirect(f'/{pk}')
 
 
-def delpost(request, pk: int):
+def delcoment(request, pk: int):
     post = CommentsModel.objects.get(id=pk)
     post.delete()
     return redirect('home')
+
+
+class Change(View):
+    def get(self, request, pk):
+        date = Post.objects.get(id=pk)
+        form = AddBlogForm(instance=date)
+        context = {'date': form}
+        return render(request, 'blog/change.html', context)
+
+    def post(self, request, pk):
+        date = Post.objects.get(id=pk)
+        form = AddBlogForm(request.POST, instance=date)
+        if form.is_valid():
+            form.save()
+        return redirect('home')
