@@ -73,4 +73,5 @@ class Change(View):
         form = AddBlogForm(request.POST, instance=date)
         if form.is_valid():
             form.save()
-        return redirect('home')
+            return redirect(f'{pk}')
+        return render(request, f'{pk}')
