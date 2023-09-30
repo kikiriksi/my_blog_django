@@ -50,6 +50,7 @@ class Comments(View):
         form = CommentsForm(request.POST)
         if form.is_valid():
             form = form.save(commit=False)
+            form.user = CustomUser.objects.get(username=request.user)
             form.post = Post.objects.get(id=pk)
             form.save()
         return redirect(f'/{pk}')

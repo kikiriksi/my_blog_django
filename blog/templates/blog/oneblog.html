@@ -20,7 +20,7 @@
          <form action="{% url 'delcoment' coment.id %}" method="post">
          {% csrf_token %}
             <br><p>Коментарий:{{ coment }}</p>
-            <p>Автор коментария:{{ coment.post.user }}</p>
+            <p>Автор коментария:{{ coment.user }}</p>
             {% if user == coment.post.user %}
                 <button type="submit">Удалить коментарий</button>
          </form>
@@ -28,7 +28,7 @@
      {% endfor %}
      {% if user.is_authenticated %}
          <form action="{% url 'addbcomment' post.id %}" method="post">
-         {% csrf_token %}
+            {% csrf_token %}
             {{ formcomit }}
          <button type="submit">Оставить коментарий</button>
      </form>
