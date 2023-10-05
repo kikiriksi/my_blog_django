@@ -18,13 +18,13 @@
             <h3><a href="{% url 'home' %}">На главную</a></h3>
      {% for coment in coments %}
          <form action="{% url 'delcoment' coment.id %}" method="post">
-         {% csrf_token %}
+            {% csrf_token %}
             <br><p>Коментарий:{{ coment }}</p>
             <p>Автор коментария:{{ coment.user }}</p>
-            {% if user == coment.post.user %}
+            {% if user == coment.user %}
                 <button type="submit">Удалить коментарий</button>
-         </form>
             {% endif %}
+         </form>
      {% endfor %}
      {% if user.is_authenticated %}
          <form action="{% url 'addbcomment' post.id %}" method="post">
